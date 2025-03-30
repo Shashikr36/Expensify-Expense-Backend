@@ -95,63 +95,6 @@ server.js         -> Main entry point
 package.json      -> Project dependencies
 ```
 
----
-
-## 🚀 **Deployment**
-
-### **1. Docker Deployment**
-To containerize the app, create a `Dockerfile`:
-```dockerfile
-# Base image
-FROM node:20-alpine
-
-# Set working directory
-WORKDIR /app
-
-# Install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy source code
-COPY . .
-
-# Set environment variables
-ENV NODE_ENV=production
-ENV PORT=8080
-
-# Expose the port and run server
-EXPOSE 8080
-CMD ["node", "server.js"]
-```
-- **Build and run the container:**
-```bash
-docker build -t expensify-backend .
-docker run -p 8080:8080 expensify-backend
-```
-
-### **2. PM2 for Production**
-Use PM2 for process management:
-```bash
-pm2 start server.js --name "expensify-backend"
-pm2 save
-pm2 status
-```
-
-### **3. CI/CD Pipeline (Optional)**
-Integrate CI/CD pipelines with GitHub Actions or GitLab CI to automate testing and deployment.
-
----
-
-## ⚡ **Security & Best Practices**
-- 🔑 Use HTTPS for secure communication in production.  
-- 🔥 Store sensitive information (e.g., MongoDB URI, JWT secret) in `.env` files.  
-- 🚀 Use **helmet.js** to secure HTTP headers.  
-- ⏱️ Implement rate limiting to prevent brute-force attacks.  
-- ✅ Validate user input to prevent NoSQL injection.  
-
----
-
-
 ## 📩 **Contact**
 
 For any inquiries or support, reach out to:  
